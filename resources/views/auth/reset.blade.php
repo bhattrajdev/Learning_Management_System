@@ -22,18 +22,26 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h2">Forget Password</a>
+                <a href="../../index2.html" class="h2">Reset Password</a>
             </div>
             <div class="card-body">
                 @include('_messages')
 
-                <form action="{{ url('/forgot-password') }}" method="post">
+                <form action="" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="cpassword" placeholder="ConfirmPassword">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
@@ -41,7 +49,7 @@
 
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Forgot</button>
+                        <button type="submit" class="btn btn-primary btn-block">Reset</button>
                     </div>
                     <!-- /.col -->
             </div>
