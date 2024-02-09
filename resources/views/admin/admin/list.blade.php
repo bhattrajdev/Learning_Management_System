@@ -23,6 +23,7 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Created On</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -32,15 +33,22 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $value['name'] }}</td>
                                     <td>{{ $value['email'] }}</td>
-                                    <td>
-                                        <a href="{{ url('admin/admin/list/' . $value['id'] . '/edit') }}"><button
-                                                class="btn btn-primary"><i class="fas fa-edit mr-2"></i>Edit</button></a>
-                                        <form action={{ url('/admin/admin/list/' . $value['id']) }} emth>
-                                            @method('delete')
-                                            <button class="btn btn-danger" onclick="return(confirm('Are you sure?'))"><i
-                                                    class="fas fa-trash mr-2"></i>Delete</button>
+                                    <td>{{ $value['created_at'] }}</td>
+                                    <td class="d-flex">
+                                        <a href="{{ url('admin/admin/list/' . $value['id'] . '/edit') }}" class="mr-1">
+                                            <button class="btn btn-primary"><i class="fas fa-edit mr-2"></i>Edit</button>
+                                        </a>
+
+                                        <form action="{{ url('admin/admin/list/' . $value['id']) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger ml-1"
+                                                onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash mr-2"></i>Delete
+                                            </button>
                                         </form>
                                     </td>
+
 
                                 </tr>
                             @endforeach

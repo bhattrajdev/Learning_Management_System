@@ -34,15 +34,19 @@ class AuthController extends Controller
         $remember  = !empty($request->remember) ? true : false;
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
-
-            if (Auth::user()->user_types === 1) {
-                return redirect('admin/dashboard');
-            } elseif (Auth::user()->user_types === 2) {
-                return redirect('teacher/dashboard');
-            } elseif (Auth::user()->user_types === 3) {
-                return redirect('student/dashboard');
-            } elseif (Auth::user()->user_types === 4) {
-                return redirect('parent/dashboard');
+            if (Auth::user()->is_deleted === 1) {
+                Auth::logout();
+                return redirect()->back()->with('error', 'Unauthorized access.');
+            } else {
+                if (Auth::user()->user_types === 1) {
+                    return redirect('admin/dashboard');
+                } elseif (Auth::user()->user_types === 2) {
+                    return redirect('teacher/dashboard');
+                } elseif (Auth::user()->user_types === 3) {
+                    return redirect('student/dashboard');
+                } elseif (Auth::user()->user_types === 4) {
+                    return redirect('parent/dashboard');
+                }
             }
         } else {
             return redirect()->back()->with('error', 'Please enter correct email and password');
